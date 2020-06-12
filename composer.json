@@ -1,0 +1,17 @@
+{
+    "name": "medschoolcoach/http-client",
+    "authors": [
+        {
+            "name": "cbrhex",
+            "email": "cbrhex@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "MedSchoolCoach\\HttpClient\\": "src/"
+        }
+    }
+}
