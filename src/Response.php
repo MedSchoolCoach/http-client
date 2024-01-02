@@ -6,15 +6,9 @@ use Psr\Http\Message\MessageInterface;
 
 class Response
 {
-    /**
-     * @var array
-     */
-    protected $decoded;
+    protected array $decoded;
 
-    /**
-     * @var MessageInterface
-     */
-    protected $response;
+    protected MessageInterface $response;
 
     /**
      * Response constructor.
@@ -25,10 +19,7 @@ class Response
         $this->response = $response;
     }
 
-    /**
-     * @return array
-     */
-    public function json()
+    public function json(): array
     {
         if (! $this->decoded) {
             $this->decoded = json_decode((string) $this->response->getBody(), true);
@@ -37,20 +28,12 @@ class Response
         return $this->decoded;
     }
 
-    /**
-     * @param string $key
-     * @return bool
-     */
-    public function has(string $key)
+    public function has(string $key): bool
     {
         return isset($this->json()[$key]);
     }
 
-    /**
-     * @param string $key
-     * @return mixed
-     */
-    public function get(string $key)
+    public function get(string $key): mixed
     {
         return $this->json()[$key];
     }

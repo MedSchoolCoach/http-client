@@ -6,29 +6,18 @@ use GuzzleHttp\Client;
 
 class Request
 {
-    /**
-     * @var string
-     */
-    private $bodyFormat;
+    private string $bodyFormat;
+    private array $headers;
 
-    /**
-     * @var array
-     */
-    private $headers;
-
-    /**
-     * Request constructor.
-     */
     public function __construct()
     {
         $this->asJson();
     }
 
     /**
-     * @param $headers
      * @return $this
      */
-    public function withHeaders($headers)
+    public function withHeaders(array $headers): static
     {
         return tap($this, function ($request) use ($headers) {
             foreach ($headers as $key => $value) {
@@ -37,9 +26,6 @@ class Request
         });
     }
 
-    /**
-     * @return mixed
-     */
     public function asJson()
     {
         return $this->bodyFormat('json')->contentType('application/json');
@@ -66,23 +52,17 @@ class Request
     }
 
     /**
-     * @param string $url
-     * @param array $data
-     * @return Response
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function get(string $url, array $data = [])
+    public function get(string $url, array $data = []): Response
     {
         return $this->send('GET', $url, $data);
     }
 
     /**
-     * @param string $url
-     * @param array $data
-     * @return Response
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function post(string $url, array $data = [])
+    public function post(string $url, array $data = []): Response
     {
         return $this->send('POST', $url, [
             $this->bodyFormat => $data,
@@ -90,12 +70,9 @@ class Request
     }
 
     /**
-     * @param string $url
-     * @param array $data
-     * @return Response
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function patch(string $url, array $data = [])
+    public function patch(string $url, array $data = []): Response
     {
         return $this->send('PATCH', $url, [
             $this->bodyFormat => $data,
