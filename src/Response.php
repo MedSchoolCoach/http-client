@@ -6,7 +6,7 @@ use Psr\Http\Message\MessageInterface;
 
 class Response
 {
-    protected array $decoded;
+    protected ?array $decoded = null;
 
     protected MessageInterface $response;
 
